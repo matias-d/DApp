@@ -1,0 +1,24 @@
+# Node modules
+node_modules/
+
+# Build folders
+/build/
+/DApp-frontend/build/
+
+# Environment variables
+.env
+
+# Truffle build artifacts
+/DApp-truffle/build/
+/DApp-truffle/.openzeppelin/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# MacOS files
+.DS_Store
+
+# VSCode settings
+.vscode/
