@@ -1,4 +1,4 @@
-export default function IconArrow() {
+export default function IconMenu() {
   return (
     <svg
       width="32"
@@ -8,14 +8,21 @@ export default function IconArrow() {
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
-        d="M15 18L17.6059 15.3941C18.7939 14.2061 19.388 13.612 19.6105 12.9271C19.8063 12.3245 19.8063 11.6755 19.6105 11.0729C19.388 10.388 18.7939 9.79394 17.6059 8.60589L15 6"
+        d="M5 12H19"
         stroke="currentColor"
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
-        d="M3 12H19.5"
+        d="M5 8H19"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M5 16H19"
         stroke="currentColor"
         strokeWidth="1.5"
         strokeLinecap="round"

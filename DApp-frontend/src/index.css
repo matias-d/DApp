@@ -1,16 +1,15 @@
 @import "tailwindcss";
 
-
 :root {
-  font-family: sans-serif , system-ui, Avenir, Helvetica, Arial, ;
-  line-height: 1.5;
+  font-family: "Space Grotesk", sans-serif;
+  font-optical-sizing: auto;
   font-weight: 400;
+  font-style: normal;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
 }
 
 body {
-  @apply bg-zinc-800 text-white
+  @apply bg-zinc-800 text-white;
 }
-
