@@ -41,10 +41,10 @@
  * https://trufflesuite.com/docs/truffle/getting-started/using-the-truffle-dashboard/
  */
 
-// require('dotenv').config();
-// const { MNEMONIC, PROJECT_ID } = process.env;
+require("dotenv").config();
+const { MNEMONIC, PROJECT_ID } = process.env;
 
-// const HDWalletProvider = require('@truffle/hdwallet-provider');
+const HDWalletProvider = require("@truffle/hdwallet-provider");
 
 module.exports = {
   /**
@@ -65,10 +65,23 @@ module.exports = {
     // options below to some value.
     //
     ganache: {
-     host: "127.0.0.1",     // Localhost (default: none)
-     port: 7545,            // Standard Ethereum port (default: none)
-     network_id: "*",       // Any network (default: none)
+      host: "127.0.0.1", // Localhost (default: none)
+      port: 7545, // Standard Ethereum port (default: none)
+      network_id: "*", // Any network (default: none)
     },
+    // Binance Smart Chain Testnet (BSC)
+    bsc: {
+      provider: () =>
+        new HDWalletProvider(
+          MNEMONIC,
+          "https://data-seed-prebsc-1-s1.binance.org:8545"
+        ),
+      network_id: 97,
+      confirmations: 1,
+      timeoutBlocks: 200,
+      skipDryRun: true,
+    },
+
     //
     // An additional network, but with some advanced options…
     // advanced: {
@@ -110,11 +123,11 @@ module.exports = {
       settings: {
         optimizer: {
           enabled: true,
-          runs: 200
+          runs: 200,
         },
-        evmVersion: "london"  // o "paris" si querés lo último
-      }
-    }
+        evmVersion: "london", // o "paris" si querés lo último
+      },
+    },
   },
 
   // Truffle DB is currently disabled by default; to enable it, change enabled:

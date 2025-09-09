@@ -4,36 +4,38 @@ pragma solidity ^0.8.17;
 
 contract JamToken {
 
-    // Declaraciones
-    string public name ="JAM Token";
+    // Token basic info
+    string public name = "JAM Token";
     string public symbol = "JAM";
-    uint256 public totalSupply = 1000000000000000000000000; // 1 millon de tokens
+    uint256 public totalSupply = 1000000000000000000000000; // 1 million tokens
     uint8 public decimals = 18;
 
-    // Evento para la transferencia de tokens de un usuario
-    event Transfer (
+    // Event emitted when tokens are transferred
+    event Transfer(
         address indexed _from,
         address indexed _to,
         uint256 _value
     );
 
-    // Evento para la aprobacion de un operador
+    // Event emitted when an operator is approved
     event Approval(
         address indexed _owner,
         address indexed _spender,
         uint256 _value
     );
 
-    // Estructura de datos
+    // Stores balances of each address
     mapping(address => uint256) public balanceOf;
-    mapping (address => mapping(address => uint256)) public allowance;
 
-    // Constructor
+    // Stores allowances for delegated spending
+    mapping(address => mapping(address => uint256)) public allowance;
+
+    // Constructor: assigns the total supply to the contract deployer
     constructor() {
         balanceOf[msg.sender] = totalSupply;
     }
 
-    // Transferencia de tokens de un usuario
+    // Transfer tokens from sender to another address
     function transfer(address _to, uint256 _value) public returns (bool success){
         require(balanceOf[msg.sender] >= _value, "JAM: tokens insufeccent");
 
@@ -43,14 +45,14 @@ contract JamToken {
         return  true;
     }
 
-    // Aprobacion de una cantidad para ser gastada por un operador
+    // Approve an operator to spend tokens on behalf of the sender
     function approve(address _spender, uint256 _value) public returns (bool success) {
         allowance[msg.sender][_spender] = _value;
         emit Approval(msg.sender, _spender, _value);
         return true;
     }
 
-    // Transferencia de tokens especificando el emisor
+    // Transfer tokens on behalf of another address
     function transferFrom(address _from, address _to, uint256 _value) public returns (bool success) {
         require(_value <= balanceOf[_from], "JAM: tokens insufeccent");
         require(_value <= allowance[_from][msg.sender], "JAM: allowance exceded" );

@@ -1,29 +1,17 @@
-const StellartToken = artifacts.require('StellartToken')
-const TokenFarm = artifacts.require('TokenFarm')
-const JamToken = artifacts.require('JamToken')
+const StellartToken = artifacts.require("StellartToken");
+const TokenFarm = artifacts.require("TokenFarm");
+const JamToken = artifacts.require("JamToken");
 
-module.exports = async function(deployer, network, accounts) {
+module.exports = async function (deployer, network, accounts) {
+  await deployer.deploy(JamToken);
+  const jamToken = await JamToken.deployed();
 
-    // Despliegue del JamToken
-    await deployer.deploy(JamToken)
-    const jamToken = await JamToken.deployed()
+  await deployer.deploy(StellartToken);
+  const stellartToken = await StellartToken.deployed();
 
-    // Despliegue del StellartToken
-    await deployer.deploy(StellartToken)
-    const stellartToken = await StellartToken.deployed()
+  await deployer.deploy(TokenFarm, stellartToken.address, jamToken.address);
+  const tokenFarm = await TokenFarm.deployed();
 
-    // Despliegue del TokenFarm
-    await deployer.deploy(TokenFarm, stellartToken.address, jamToken.address)
-    const tokenFarm = await TokenFarm.deployed()
-
-    // Transferir tokens StellartToken (token de recompensa) a TokenFarm (1 millon de tokens)
-    await stellartToken.transfer(tokenFarm.address, '1000000000000000000000000')
-
-    // Transferir tokens JamTokens (token de staking)
-    await jamToken.transfer(accounts[1], '100000000000000000000')
-
-
-}
-
-
-
+  // Transfer StellartToken tokens (reward tokens) to TokenFarm (1 million tokens)
+  await stellartToken.transfer(tokenFarm.address, "1000000000000000000000000");
+};
