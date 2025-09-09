@@ -2,8 +2,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { loadBlockchainData, loadWeb3 } from "../services/web3.services";
 import { createContext, useEffect, useState } from "react";
-import { toast } from "sonner";
 import type { Contract } from "web3";
+import { toast } from "sonner";
 
 interface IWeb3Context {
   accounts: string[];
@@ -70,7 +70,7 @@ export const Web3Provider = ({ children }: Web3ProviderProps) => {
     });
   };
 
-  // Cargar cuentas
+  // Load accounts
   const refreshAccounts = async () => {
     setLoading(true);
     try {
@@ -102,13 +102,11 @@ export const Web3Provider = ({ children }: Web3ProviderProps) => {
 
     try {
       if (BigInt(balance) < BigInt(amount)) {
-        toast.error("No tienes suficientes tokens para stakear esa cantidad.");
+        toast.error("You do not have enough tokens to stake that amount.");
         return;
       }
 
-      // Si allowance es menor que amount, hacer approve automático
       if (BigInt(allowance) < BigInt(amount)) {
-        console.log("Allowance insuficiente, aprobando tokens...");
         await jamToken.methods
           .approve(tokenFarm._address, amount)
           .send({ from: accounts[0] });
@@ -117,10 +115,10 @@ export const Web3Provider = ({ children }: Web3ProviderProps) => {
       await tokenFarm.methods
         .stakeTokens(amount)
         .send({ from: accounts[0], gas: 500000 });
-      toast.success("Tus tokens ahora están en stake.");
+      toast.success("Your tokens are now staked.");
     } catch (error) {
-      console.error("Error al hacer stake:", error);
-      toast.error("Ocurrió un error al stakear.");
+      console.error("Error while staking:", error);
+      toast.error("An error occurred while staking.");
     } finally {
       setLoadActionTokens((values) => ({ ...values, stake: false }));
       loadBalance(accounts[0]);
@@ -140,17 +138,17 @@ export const Web3Provider = ({ children }: Web3ProviderProps) => {
         .send({ from: accounts[0] })
         .on("transactionHash", (_) => {})
         .on("receipt", (_) => {
-          toast.success("Tus tokens fueron retirados correctamente.");
+          toast.success("Your tokens were successfully withdrawn.");
           setLoadActionTokens((values) => ({ ...values, unstake: false }));
         })
         .on("error", (err: any) => {
-          console.error("Error al retirar tokens:", err);
-          toast.error("Ocurrió un error al retirar tus tokens.");
+          console.error("Error retrieving tokens:", err);
+          toast.error("An error occurred while withdrawing your tokens.");
           setLoadActionTokens((values) => ({ ...values, unstake: false }));
         });
     } catch (err) {
-      console.error("Error inesperado al retirar tokens:", err);
-      toast.error("Ocurrió un error inesperado.");
+      console.error("Unexpected error while retrieving tokens:", err);
+      toast.error("An unexpected error occurred.");
       setLoadActionTokens((values) => ({ ...values, unstake: false }));
     } finally {
       loadBalance(accounts[0]);

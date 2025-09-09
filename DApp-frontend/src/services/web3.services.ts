@@ -4,11 +4,11 @@ import Web3 from "web3";
 
 export async function loadWeb3() {
   const startTime = Date.now();
-  const loadingToastId = toast.loading("Cargando Web3...");
+  const loadingToastId = toast.loading("Loading Web3...");
 
   try {
     if (!window.ethereum) {
-      throw new Error("No se encontró el navegador de Ethereum");
+      throw new Error("Ethereum browser not found");
     }
 
     window.web3 = new Web3(window.ethereum);
@@ -21,27 +21,29 @@ export async function loadWeb3() {
 
     toast.dismiss(loadingToastId);
 
-    toast.success(`Web3 cargado correctamente en ${elapsed}s`);
+    toast.success(`Web3 loaded successfully in ${elapsed}s`);
 
     setTimeout(() => {
-      toast.success(`Cuentas cargadas: ${accounts[0]}`);
+      toast.success(`Charged accounts: ${accounts[0]}`);
     }, 1000);
 
     return accounts;
   } catch (error: any) {
     toast.dismiss(loadingToastId);
-    toast.error(error.message || "Error al cargar Web3");
+    toast.error(error.message || "Error loading Web3");
     console.error(error);
     throw error;
   }
 }
 
 export async function loadBlockchainData(account: string) {
-  const web3 = new Web3("http://127.0.0.1:7545");
+  const web3 = new Web3(window.ethereum);
+
   const networkId = await web3.eth.net.getId();
 
-  if (Number(networkId) !== 5777) {
-    toast.error("Necesitás estar conectado a la red de Ganache (ID: 5777).");
+  // BSC Testnet networkId: 97
+  if (Number(networkId) !== 97) {
+    toast.error("You need to be connected to BSC Testnet. (ID: 97).");
     throw new Error("Wrong network");
   }
 
