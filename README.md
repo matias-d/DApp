@@ -1,4 +1,4 @@
-# Stake & Earn DApp (React + Truffle)
+# Stake & Earn DApp
 
 ## Description
 
