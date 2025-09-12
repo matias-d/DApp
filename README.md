@@ -1,4 +1,4 @@
-# Stake & Earn DApp
+# Stake & Earn Tokens
 
 ## Description
 
