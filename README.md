@@ -1,4 +1,4 @@
-# Stake & Earn Tokens
+# Stake and earn tokens with ERC-20 Tokens
 
 ## Description
 
