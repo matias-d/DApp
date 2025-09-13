@@ -1,4 +1,4 @@
-# DeFi Dapp with React and Truffle
+# Stake and earn tokens with ERC-20 Tokens
 
 ## Description
 
@@ -109,7 +109,7 @@ DApp/
 
 **Matias Ezequiel Cabrera**  
 [@matias-d](https://github.com/matias-d)  
-**Role:** Full Stack Developer
+Full Stack Developer
 
 I was responsible for:
 
