@@ -1,7 +1,9 @@
 {
-  "name": "matias",
+  "name": "dapp-frontend",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "author": "Matias Ezequiel Cabrera",
+  "description": "Frontend for a decentralized DeFi stake and earn tokens built with React.",
   "type": "module",
   "scripts": {
     "dev": "vite",
