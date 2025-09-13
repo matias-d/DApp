@@ -40,7 +40,7 @@ Before running the project, make sure you have the following installed:
 - **Truffle** (globally installed)
 
 ```bash
-git clone https://github.com/matias-d/DApp.git
+git clone https://github.com/matias-d/staking-rewards-dapp.git
 cd DApp
 
 # Install frontend dependencies
@@ -74,7 +74,7 @@ truffle migrate
 ## Project Structure
 
 ```bash
-DApp/
+staking-rewards-dapp/
 ├── frontend/                 # React TypeScript TailwindCSS
 │   ├── src/
 │   │   ├── components/     # React components
